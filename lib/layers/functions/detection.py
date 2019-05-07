@@ -129,12 +129,12 @@ class Detect(Function):
                 _t['cpu'].tic()
                 c_mask = conf_scores[cl].gt(self.conf_thresh).nonzero().view(-1)
                 cpu_tims+=_t['cpu'].toc()
-                if c_mask.dim() == 0:
+                if c_mask.size(0) == 0:
                     continue
                 _t['score_mask'].tic()
                 scores = conf_scores[cl][c_mask]
                 scores_time+=_t['score_mask'].toc()
-                if scores.dim() == 0:
+                if scores.size(0) == 0:
                     continue
                 _t['box_mask'].tic()
                 # l_mask = c_mask.unsqueeze(1).expand_as(decoded_boxes)
